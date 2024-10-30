@@ -3,5 +3,6 @@
 
 @import url(base/font.css);
 @import url(base/helper.css);
+@import url(base/normalize.css);
 @import url(base/reset.css);
 @import url(base/typgraphy.css);
