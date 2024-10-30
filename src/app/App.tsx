@@ -7,7 +7,6 @@ const App = () => {
   const {theme} = useContext(ThemeContext) as ThemeContextType;
   return (
     <div className={`${styles.app} ${theme}`}>
-      <h1>Hello World</h1>
       <Button />
     </div>
   );
