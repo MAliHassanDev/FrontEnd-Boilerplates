@@ -2,3 +2,13 @@ body{
   min-height: 100vh;
   min-height: 100svh;
 }
+
+
+
+
+article{
+  /* sets the max character count */
+  max-inline-size: 66ch;
+  /* increase the line height */
+  line-height: 1.6;
+}
