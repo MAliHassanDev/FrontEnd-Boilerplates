@@ -1,14 +1,21 @@
 body{
-  min-height: 100vh;
-  min-height: 100svh;
+  /* background-color: var(--clr-bg-primary);
+  color: var(--clr-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column; */
+  height: 100vh;
+  height: 100svh;
 }
 
 
-
-
-article{
-  /* sets the max character count */
-  max-inline-size: 66ch;
-  /* increase the line height */
-  line-height: 1.6;
+body p{
+  text-align: justify;
+  line-height: calc(1.5em + 0.2vw);
+  width: 60ch;
+  max-width: 100%;
 }
+
+
