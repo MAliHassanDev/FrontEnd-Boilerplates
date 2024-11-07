@@ -1,17 +1,25 @@
-:root{
+:root {
   --clr-bg-primary: whiteSmoke;
   --clr-text-primary: black;
 }
 
-
-.light{
+.light {
   --clr-bg-primary: whiteSmoke;
   --clr-text-primary: black;
 }
 
-.dark{
+.dark {
   --clr-bg-primary: #333;
   --clr-text-primary: whiteSmoke;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --clr-bg-primary: #333;
+    --clr-text-primary: whiteSmoke;
+    --theme-name: "dark"
+  }
+}
+
 
 

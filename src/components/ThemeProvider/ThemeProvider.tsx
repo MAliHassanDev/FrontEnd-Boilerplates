@@ -48,7 +48,7 @@ const ThemeProvider = ({children}:ThemeProviderProps) => {
 function getTheme() {
   const theme = localStorage.getItem("sketchTheme");
   if (!theme) {
-    const defaultTheme = "light";
+    const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark": "light";
     localStorage.setItem("sketchTheme", defaultTheme);
     return defaultTheme;
   } else {
