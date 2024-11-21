@@ -5,6 +5,8 @@
 *::after{
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
 }
 
 /* make 10px as default value of 1rem */
