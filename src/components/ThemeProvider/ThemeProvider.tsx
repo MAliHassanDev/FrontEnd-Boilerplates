@@ -1,4 +1,4 @@
-import ThemeContext from "@/hooks/context/themeContext";
+import ThemeContext, { Theme } from "@/hooks/context/themeContext";
 import {useEffect, useState,  } from "react";
 
 
@@ -8,7 +8,7 @@ type ThemeProviderProps = {
   children: React.JSX.Element[] | React.JSX.Element
 }
 const ThemeProvider = ({children}:ThemeProviderProps) => {
-  const [theme, setTheme] = useState<string>(getTheme());
+  const [theme, setTheme] = useState<Theme>(getTheme());
   
 
   useEffect(() => {
@@ -38,9 +38,9 @@ const ThemeProvider = ({children}:ThemeProviderProps) => {
 
 
 function getTheme() {
-  const theme = localStorage.getItem("sketchTheme");
+  const theme = localStorage.getItem("sketchTheme") as Theme|null;
   if (!theme) {
-    const defaultTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark": "light";
+    const defaultTheme:Theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark": "light";
     localStorage.setItem("sketchTheme", defaultTheme);
     return defaultTheme;
   } else {
