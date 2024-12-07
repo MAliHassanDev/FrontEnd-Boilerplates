@@ -1,13 +1,5 @@
-import {createContext, Dispatch, SetStateAction, useEffect, useState,  } from "react";
-
-
-export type ThemeContextType = {
-  theme: string,
-  setTheme: Dispatch<SetStateAction<string>>
-  toggleTheme: ()=> void,
-}
-
-const ThemeContext = createContext<ThemeContextType | null>(null);
+import ThemeContext from "@/hooks/context/themeContext";
+import {useEffect, useState,  } from "react";
 
 
 
