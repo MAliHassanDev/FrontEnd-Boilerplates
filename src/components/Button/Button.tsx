@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import ThemeContext, { ThemeContextType } from "@/hooks/context/themeContext";
+import ThemeContext, { type ThemeContextType } from "@/hooks/context/themeContext";
 import styles from "@/components/button/Button.module.css";
 
 const Button = () => {

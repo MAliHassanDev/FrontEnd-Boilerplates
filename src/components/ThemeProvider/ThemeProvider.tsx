@@ -1,19 +1,15 @@
-import ThemeContext, { Theme } from "@/hooks/context/themeContext";
-import {useEffect, useState,  } from "react";
-
-
-
+import ThemeContext, { type Theme } from "@/hooks/context/themeContext";
+import { useEffect, useState, type JSX } from "react";
 
 type ThemeProviderProps = {
-  children: React.JSX.Element[] | React.JSX.Element
-}
-const ThemeProvider = ({children}:ThemeProviderProps) => {
+  children: Array<JSX.Element> | JSX.Element;
+};
+const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(getTheme());
-  
 
   useEffect(() => {
     localStorage.setItem("sketchTheme", theme);
-  },[theme]);
+  }, [theme]);
 
   function toggleTheme() {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -21,26 +17,26 @@ const ThemeProvider = ({children}:ThemeProviderProps) => {
   }
 
   return (
-    <ThemeContext.Provider value={
-      {
+    <ThemeContext.Provider
+      value={{
         theme,
         setTheme,
-        toggleTheme
-      }
-    }
+        toggleTheme,
+      }}
     >
       {children}
     </ThemeContext.Provider>
   );
 };
 
-
-
-
 function getTheme() {
-  const theme = localStorage.getItem("sketchTheme") as Theme|null;
+  const theme = localStorage.getItem("sketchTheme") as Theme | null;
   if (!theme) {
-    const defaultTheme:Theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark": "light";
+    const defaultTheme: Theme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches
+      ? "dark"
+      : "light";
     localStorage.setItem("sketchTheme", defaultTheme);
     return defaultTheme;
   } else {
@@ -48,5 +44,4 @@ function getTheme() {
   }
 }
 
-
-export  {ThemeProvider,ThemeContext};
+export { ThemeProvider, ThemeContext };
