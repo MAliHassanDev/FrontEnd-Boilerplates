@@ -16,7 +16,7 @@ export default tseslint.config(
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2022,
       globals: globals.browser,
       parserOptions: {
         projectService: true,
@@ -30,12 +30,22 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      ...reactRefresh.configs.recommended.rules,
       semi: "error",
       "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        { allowNumber: true },
+      ],
+      "@typescript-eslint/array-type": ["error", { default: "generic" }],
+    },
+  },
+  {
+    files: ["**/*.js"],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    rules: {
+      semi: "error",
     },
   }
 );
+
