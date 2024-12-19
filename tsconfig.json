@@ -30,6 +30,6 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src"],
+  "include": ["src","tests"],
   "exclude": ["node_modules"]
 }
