@@ -20,7 +20,6 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     <ThemeContext.Provider
       value={{
         theme,
-        setTheme,
         toggleTheme,
       }}
     >
