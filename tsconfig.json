@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "esModuleInterop": true,
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -30,6 +30,6 @@
     "noUncheckedSideEffectImports": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

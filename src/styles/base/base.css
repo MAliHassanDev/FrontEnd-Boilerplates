@@ -1,4 +1,4 @@
-body{
+body {
   /* background-color: var(--clr-bg-primary);
   color: var(--clr-text-primary);
   display: flex;
@@ -10,12 +10,9 @@ body{
   height: 100svh;
 }
 
-
-body p{
+body p {
   text-align: justify;
   line-height: calc(1.5em + 0.2vw);
   width: 60ch;
   max-width: 100%;
 }
-
-

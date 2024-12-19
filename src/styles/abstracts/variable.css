@@ -17,9 +17,6 @@
   :root {
     --clr-bg-primary: #333;
     --clr-text-primary: whiteSmoke;
-    --theme-name: "dark"
+    --theme-name: "dark";
   }
 }
-
-
-

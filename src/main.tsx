@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
-import {StrictMode } from "react";
+import { StrictMode } from "react";
 import App from "@/app/App";
-import { ThemeProvider } from "@/components/ThemeProvider/ThemeProvider";
 import "./styles/main.css";
+import { ThemeProvider } from "@/components/themeProvider/ThemeProvider";
 
 const rootElement = document.getElementById("root");
 
@@ -13,8 +13,5 @@ createRoot(rootElement).render(
     <ThemeProvider>
       <App />
     </ThemeProvider>
-  </StrictMode>
+  </StrictMode>,
 );
-
-
-

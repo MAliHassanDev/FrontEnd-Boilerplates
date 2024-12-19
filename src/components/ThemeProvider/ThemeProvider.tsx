@@ -33,7 +33,7 @@ function getTheme() {
   const theme = localStorage.getItem("sketchTheme") as Theme | null;
   if (!theme) {
     const defaultTheme: Theme = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches
       ? "dark"
       : "light";
