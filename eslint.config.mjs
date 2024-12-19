@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 import eslintReact from "eslint-plugin-react";
 
 export default tseslint.config(
-  { ignores: ["**/*.js", "vite.config.ts", "**/*.mjs", "dist/**", "build/**"] },
+  { ignores: ["dist/**"] },
   {
     extends: [
       js.configs.recommended,
@@ -18,6 +18,10 @@ export default tseslint.config(
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: {
       "react-hooks": reactHooks,
@@ -32,14 +36,6 @@ export default tseslint.config(
       ],
       semi: "error",
       "@typescript-eslint/no-unused-vars": "warn",
-    },
-  },
-  {
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
     },
   }
 );

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import styles from "./Button.module.css";
-import { ThemeContext, ThemeContextType } from "@/components/ThemeProvider/ThemeProvider";
+import ThemeContext, { ThemeContextType } from "@/hooks/context/themeContext";
+import styles from "@/components/button/Button.module.css";
 
 const Button = () => {
   const {theme,toggleTheme} = useContext(ThemeContext) as ThemeContextType;
@@ -11,5 +11,7 @@ const Button = () => {
     Switch to {theme == "dark" ? "light" : "dark"} mode
   </button>;
 };
+
+
 
 export default Button;
