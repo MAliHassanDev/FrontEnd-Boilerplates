@@ -19,7 +19,7 @@ const vitestConfig = defineVitestConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./tests/vitest.setup.ts"],
-    restoreMocks: true
+    restoreMocks: true,
   },
 });
 
