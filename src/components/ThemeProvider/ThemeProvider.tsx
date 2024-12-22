@@ -8,7 +8,7 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(getTheme());
 
   useEffect(() => {
-    localStorage.setItem("sketchTheme", theme);
+    localStorage.setItem("BoilerplateTheme", theme);
   }, [theme]);
 
   function toggleTheme() {
@@ -29,14 +29,14 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 };
 
 function getTheme() {
-  const theme = localStorage.getItem("sketchTheme") as Theme | null;
+  const theme = localStorage.getItem("BoilerplateTheme") as Theme | null;
   if (!theme) {
     const defaultTheme: Theme = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches
       ? "dark"
       : "light";
-    localStorage.setItem("sketchTheme", defaultTheme);
+    localStorage.setItem("BoilerplateTheme", defaultTheme);
     return defaultTheme;
   } else {
     return theme;
