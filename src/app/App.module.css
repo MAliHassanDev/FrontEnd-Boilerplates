@@ -1,7 +1,6 @@
 .app {
   background-color: var(--clr-bg-primary);
   color: var(--clr-text-primary);
-  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,10 +8,6 @@
   -moz-tap-highlight-color: transparent;
 }
 
-/* make 10px as default value of 1rem */
-html {
-  font-size: 62.5%;
-}
 
 /* increases line height */
 :root {
