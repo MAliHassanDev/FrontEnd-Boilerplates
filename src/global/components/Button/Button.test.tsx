@@ -7,8 +7,8 @@ import ThemeContext, {
 describe("Button", () => {
   it("renders with text which includes opposite theme", () => {
     renderButtonWithContext({
-      theme: "dark",
-      toggleTheme: vi.fn(),
+      theme: { mode: "dark", colors: {} },
+      toggleThemeMode: vi.fn(),
     });
     const button = screen.getByTestId("button");
     expect(button).toBeInTheDocument();
@@ -16,19 +16,25 @@ describe("Button", () => {
   });
 
   it("calls toggleTheme when clicked", () => {
-    const toggleTheme = vi.fn();
-    renderButtonWithContext({ theme: "dark", toggleTheme });
+    const toggleThemeMode = vi.fn();
+    renderButtonWithContext({
+      theme: { mode: "dark", colors: {} },
+      toggleThemeMode,
+    });
     fireEvent.click(screen.getByTestId("button"));
-    expect(toggleTheme).toHaveBeenCalledOnce();
+    expect(toggleThemeMode).toHaveBeenCalledOnce();
   });
 });
 
-function renderButtonWithContext({ theme, toggleTheme }: ThemeContextType) {
+function renderButtonWithContext({
+  theme,
+  toggleThemeMode,
+}: ThemeContextType<string>) {
   render(
     <ThemeContext.Provider
       value={{
         theme,
-        toggleTheme,
+        toggleThemeMode,
       }}
     >
       <Button />
