@@ -6,3 +6,10 @@
 @import url(base/normalize.css);
 @import url(base/reset.css);
 @import url(base/typgraphy.css);
+
+
+
+#root,
+.root{
+  height: 100%;
+}
