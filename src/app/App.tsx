@@ -1,14 +1,11 @@
-import ThemeContext, {
-  type ThemeContextType,
-} from "@/hooks/context/themeContext";
+import useTheme from "@/global/hooks/useTheme";
 import styles from "./App.module.css";
-import { useContext } from "react";
-import Button from "@/components/button/Button";
+import Button from "@/global/components/Button/Button";
 
 const App = () => {
-  const { theme } = useContext(ThemeContext) as ThemeContextType;
+  const {theme} = useTheme();
   return (
-    <div className={`${styles.app} ${theme}`}>
+    <div className={`${styles.app} ${theme.mode}`}>
       <Button />
     </div>
   );

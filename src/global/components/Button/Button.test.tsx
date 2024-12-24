@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import Button from "./Button";
 import ThemeContext, {
   type ThemeContextType,
-} from "@/hooks/context/themeContext";
+} from "@/global/context/themeContext";
 
 describe("Button", () => {
   it("renders with text which includes opposite theme", () => {
