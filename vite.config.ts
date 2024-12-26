@@ -11,7 +11,8 @@ const viteConfig = defineViteConfig({
       "@/components": "/src/components",
       "@/hooks": "/src/hooks",
       "@/global": "/src/global",
-      "@/config": "/src/config"
+      "@/config": "/src/config",
+      "@/styles": "/src/styles",
     },
   },
 });

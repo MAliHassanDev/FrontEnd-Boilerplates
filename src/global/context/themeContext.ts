@@ -2,9 +2,9 @@ import { createContext } from "react";
 
 export type ThemeMode = "dark" | "light";
 
-export type Colors<T extends string> = Record<T,string>
+export type Colors<T extends string> = Record<T, string>;
 
-export type Theme<T extends string > = {
+export type Theme<T extends string> = {
   mode: ThemeMode;
   colors: Colors<T>;
 };

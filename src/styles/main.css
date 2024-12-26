@@ -7,9 +7,13 @@
 @import url(base/reset.css);
 @import url(base/typgraphy.css);
 
-
-
 #root,
-.root{
+.root {
   height: 100%;
+}
+
+/* Applies to all global svg icons */
+.svg_icon {
+  background-color: transparent;
+  display: inline-block;
 }

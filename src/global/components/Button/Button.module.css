@@ -2,7 +2,9 @@
   padding: 6px 16px;
   font-size: 16px;
   cursor: pointer;
-
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   &:active {
     transform: scale(0.95);
   }

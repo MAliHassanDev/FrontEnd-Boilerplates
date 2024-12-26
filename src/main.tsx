@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import App from "@/app/App";
 import ThemeProvider from "@/global/providers/ThemeProvider";
-import { theme } from "./theme/theme";
+import { theme } from "./styles/theme/theme";
 
 const rootElement = document.getElementById("root");
 

@@ -8,17 +8,10 @@ export const theme = createThemeConfig({
       light: "white",
     },
   },
-  
 } as const);
-
-
-
-
 
 function createThemeConfig<T extends string>(
   themeConfig: ThemeConfig<T>,
 ): ThemeConfig<T> {
   return themeConfig;
 }
-
-export type themeColor = keyof typeof theme.colors;
