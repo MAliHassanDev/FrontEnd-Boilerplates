@@ -1,12 +1,7 @@
-import useTheme from "@/global/hooks/useTheme";
-import styles from "./App.module.css";
-import Button from "@/global/components/Button/Button";
-
 const App = () => {
-  const { theme } = useTheme();
   return (
-    <div className={`${styles.app} ${theme.mode}`}>
-      <Button />
+    <div>
+      <h1 className="m-10 p-4 text-center text-3xl">Hello World</h1>
     </div>
   );
 };
