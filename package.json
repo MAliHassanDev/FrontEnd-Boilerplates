@@ -24,15 +24,22 @@
     ]
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.10.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zaplog": "^1.0.1"
+    "react-hook-form": "^7.54.2",
+    "react-router": "^7.1.5",
+    "react-toastify": "^11.0.3",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
     "@tailwindcss/vite": "^4.0.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "@types/dotenv": "^6.1.1",
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.4",
