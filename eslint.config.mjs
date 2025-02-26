@@ -4,6 +4,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import eslintReact from "eslint-plugin-react";
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default tseslint.config(
   { ignores: ["dist/**", "*.config.ts"] },
@@ -37,7 +38,7 @@ export default tseslint.config(
         "error",
         { allowNumber: true },
       ],
-      "@typescript-eslint/array-type": ["error", { default: "generic" }],
+      "@typescript-eslint/array-type": ["error", { default: "array" }],
     },
   },
   {
@@ -47,4 +48,5 @@ export default tseslint.config(
       semi: "error",
     },
   },
+  eslintPluginPrettierRecommended,
 );
