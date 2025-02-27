@@ -8,31 +8,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { AuthService } from "../services/auth.service";
+import { authService } from "../services/auth.service";
+import { useDispatch } from "react-redux";
+import { authActions } from "../auth.slice";
 
 export const SigninPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting: pending }
+    formState: { errors, isSubmitting: pending },
   } = useForm<SignInUserData>({
     resolver: zodResolver(signInUserSchema),
     defaultValues: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(prev => !prev);
   };
+
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
-      const authService = new AuthService();
       const { access_token } = await authService.signInUser(data);
-      
+      dispatch(authActions.setToken(access_token));
       notify.success("Sign in successful");
       await navigate("/");
     } catch (error) {
