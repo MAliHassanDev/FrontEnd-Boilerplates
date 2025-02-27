@@ -1,33 +1,38 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button } from "@/global/components/ui/Button";
-import { FormField } from "@/global/components/ui/form/FormField";
+import { Button } from "@/shared/components/ui/Button";
+import { FormField } from "@/shared/components/ui/form/FormField";
 import { notify } from "@/lib/notify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
+import { useState } from "react";
+import { AuthService } from "../services/auth.service";
 
 export const SigninPage = () => {
   const {
     register,
-
     handleSubmit,
-    formState: { errors, isSubmitting: pending },
+    formState: { errors, isSubmitting: pending }
   } = useForm<SignInUserData>({
     resolver: zodResolver(signInUserSchema),
     defaultValues: {
       email: "",
-      password: "",
-    },
+      password: ""
+    }
   });
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(prev => !prev);
+  };
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
-      // await userService.signInUser(data);
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log(data);
-      alert(data);
+      const authService = new AuthService();
+      const { access_token } = await authService.signInUser(data);
+      
       notify.success("Sign in successful");
       await navigate("/");
     } catch (error) {
@@ -74,11 +79,23 @@ export const SigninPage = () => {
           <FormField
             errorMessage={errors.password?.message}
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             label="Password"
             autoComplete="password"
             register={register}
-          />
+          >
+            <button
+              className="btn btn-ghost btn-sm btn-circle absolute top-[56%] right-0 mr-2"
+              onClick={togglePasswordVisibility}
+              type="button"
+            >
+              {showPassword ? (
+                <EyeIcon className="h-6 text-gray-400" />
+              ) : (
+                <EyeSlashIcon className="h-6 text-gray-400" />
+              )}
+            </button>
+          </FormField>
 
           <div className="form-control">
             <label className="label cursor-pointer gap-2 self-start">

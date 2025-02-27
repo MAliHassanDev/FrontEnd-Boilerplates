@@ -12,7 +12,7 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
       ...tseslint.configs.strictTypeChecked,
     ],
     files: ["**/*.{ts,tsx}"],
@@ -39,6 +39,7 @@ export default tseslint.config(
         { allowNumber: true },
       ],
       "@typescript-eslint/array-type": ["error", { default: "array" }],
+      "@typescript-eslint/consistent-type-definitions": "off"
     },
   },
   {
@@ -48,5 +49,5 @@ export default tseslint.config(
       semi: "error",
     },
   },
-  eslintPluginPrettierRecommended,
+  // eslintPluginPrettierRecommended,
 );

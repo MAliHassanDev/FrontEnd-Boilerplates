@@ -1,11 +1,8 @@
 import type { RegisterUserData, SignInUserData } from "../schema/auth.schema";
-import type { AxiosRequestConfig } from "axios";
-import { tokenService } from "./token.service";
-import { ApiService } from "@/global/services/api.service";
-import { config } from "@/config/config";
+import { ApiService } from "@/services/api.service";
 
 type SignInResponse = {
-  token: string;
+  access_token: string;
 };
 
 export type UserProfile = Omit<RegisterUserData, "password">;
@@ -14,43 +11,29 @@ export type GetUserProfileResponse = {
   user: UserProfile;
 };
 
-class UserService extends ApiService {
-  public constructor(config: AxiosRequestConfig) {
-    super(config);
+export class AuthService extends ApiService {
+  private static instance: AuthService | undefined;
+
+  private constructor() {
+    super();
   }
 
-  async registerUser(userData: RegisterUserData) {
-    return this.makeRequest<UserProfile, RegisterUserData>({
-      url: "/user/register",
-      method: "POST",
-      data: userData,
-    });
+  public static getInstance() {
+    if (!this.instance) {
+      this.instance = new AuthService();
+    }
+    return this.instance;
   }
 
   async signInUser(userData: SignInUserData) {
-    const response = await this.makeRequest<SignInResponse, SignInUserData>({
-      url: "/user/login",
+    const response = await this.makePublicRequest<SignInResponse>({
+      url: "/auth/login",
       method: "POST",
-      data: userData,
+      withCredentials: true,
+      data: userData
     });
-    tokenService.setToken(response.token);
     return response;
   }
-
-  public getUserProfile = async () => {
-    return this.makeRequest<GetUserProfileResponse>({
-      url: "/user/profile",
-      headers: {
-        Authorization: tokenService.getAuthToken(),
-      },
-    });
-  };
-
-  public logoutUser = () => {
-    tokenService.deleteToken();
-  };
 }
 
-export const userService = new UserService({
-  baseURL: config.api.baseUrl,
-});
+export const authService = AuthService.getInstance();

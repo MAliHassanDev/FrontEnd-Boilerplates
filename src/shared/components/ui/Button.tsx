@@ -14,11 +14,12 @@ export const Button = ({
   onClick,
   children,
   outline,
+  className,
   ...buttonAttributes
 }: ButtonProps) => {
   return (
     <button
-      className={`btn ${shape === "primary" ? "btn-primary" : shape === "secondary" ? "btn-secondary" : shape === "accent" ? "btn-accent" : "btn-neutral"} ${outline ? "btn-outline" : ""}`}
+      className={`btn ${shape === "primary" ? "btn-primary" : shape === "secondary" ? "btn-secondary" : shape === "accent" ? "btn-accent" : "btn-neutral"} ${outline ? "btn-outline" : ""} ${className}`}
       onClick={onClick}
       {...buttonAttributes}
       disabled={pending}
