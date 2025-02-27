@@ -3,7 +3,7 @@ import { useEffect, useReducer, type Reducer } from "react";
 
 // Define the state type
 type State<T> = {
-  loading: boolean;
+  isLoading: boolean;
   data: T | null;
   error: unknown;
 };
@@ -23,9 +23,9 @@ type Action<T> =
 function reducer<T>(_: State<T>, action: Action<T>): State<T> {
   switch (action.type) {
     case "data":
-      return { loading: false, data: action.data, error: null };
+      return { isLoading: false, data: action.data, error: null };
     case "error":
-      return { loading: false, data: null, error: action.error };
+      return { isLoading: false, data: null, error: action.error };
   }
 }
 
@@ -39,7 +39,7 @@ export const useService = <Fn extends (...args: any[]) => Promise<any>>(
   const [state, dispatch] = useReducer<
     Reducer<State<Awaited<ReturnType<Fn>>>, Action<Awaited<ReturnType<Fn>>>>
   >(reducer, {
-    loading: true,
+    isLoading: true,
     data: null,
     error: null,
   });

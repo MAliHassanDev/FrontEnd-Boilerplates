@@ -3,7 +3,7 @@ import type {
   FieldError,
   FieldPath,
   FieldValues,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 
 type Props<T extends FieldValues> = {
@@ -11,17 +11,20 @@ type Props<T extends FieldValues> = {
   label: string;
   errorMessage?: FieldError["message"];
   register: UseFormRegister<T>;
+  children?: React.ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>;
 export function FormField<T extends FieldValues>({
   name,
   label,
   errorMessage,
   register,
+  children,
+  className,
   ...rest
 }: Props<T>) {
   return (
-    <p>
-      <label className="form-control">
+    <p className={className}>
+      <label className="form-control relative">
         <span className="label">
           <span className={`label-text ${errorMessage ? "text-red-500" : ""}`}>
             {label}
@@ -33,6 +36,7 @@ export function FormField<T extends FieldValues>({
           {...register(name)}
           {...rest}
         />
+        {children}
       </label>
       {errorMessage && (
         <small className="mt-0.5 block text-red-500">{errorMessage}</small>

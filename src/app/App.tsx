@@ -2,25 +2,30 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
+  RouterProvider
 } from "react-router";
-import { RootLayout } from "@/global/layouts/RootLayout";
+import { RootLayout } from "@/shared/layouts/root/RootLayout";
 import { ToastContainer } from "react-toastify";
-import { Home } from "@/pages/home/Home";
+import { Home } from "@/pages/home/HomePage";
 import { SigninPage } from "@/features/auth/pages/SigninPage";
-import { logger } from "@/lib/logger";
+import { NotFoundPage } from "@/pages/notfound/NotFoundPage";
+import { RequireAuth } from "@/features/auth/components/RequireAuth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />} />
-      <Route path="signin" element={<SigninPage />} />
-    </Route>,
-  ),
+      <Route  element={<RequireAuth />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+      <Route path="login" element={<SigninPage />} />
+      {/* <Route path="register" element={<RegisterPage />} /> */}
+
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  )
 );
 
 const App = () => {
-  logger.info("Hello World");
   return (
     <div className="">
       <ToastContainer />
