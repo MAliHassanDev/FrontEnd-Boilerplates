@@ -2,7 +2,7 @@ import { store } from "@/app/store/store";
 import { config } from "@/config/config";
 import { authActions } from "@/features/auth/auth.slice";
 import { logger } from "@/lib/logger";
-import { TokenService } from "@/services/token.service";
+import { refreshAuthToken } from "@/services/token.service";
 import axios, { AxiosError } from "axios";
 
 declare module "axios" {
@@ -45,9 +45,8 @@ function createPrivateAxiosInstance() {
       if (error.response?.status === 401 && prevRequest && !prevRequest.sent) {
         prevRequest.sent = true;
         logger.info("Access token expired");
-        const tokenService = new TokenService();
         try {
-          const token = await tokenService.refreshAuthToken();
+          const token = await refreshAuthToken();
           prevRequest.headers.Authorization = `Bearer ${token}`;
           return await axiosPrivate.request(prevRequest);
         } catch (error: unknown) {
