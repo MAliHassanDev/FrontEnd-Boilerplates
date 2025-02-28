@@ -8,9 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { authService } from "../services/auth.service";
-import { useDispatch } from "react-redux";
-import { authActions } from "../auth.slice";
+import { signInUser } from "../services/auth.service";
 
 export const SigninPage = () => {
   const {
@@ -34,8 +32,8 @@ export const SigninPage = () => {
 
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
-      const { access_token } = await authService.signInUser(data);
-      dispatch(authActions.setToken(access_token));
+      const { access_token } = await signInUser(data);
+
       notify.success("Sign in successful");
       await navigate("/");
     } catch (error) {
