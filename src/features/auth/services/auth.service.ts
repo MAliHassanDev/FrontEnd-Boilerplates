@@ -1,5 +1,5 @@
 import type { RegisterUserData, SignInUserData } from "../schema/auth.schema";
-import { makeApiRequest } from "@/services/api.service";
+import { sendApiRequest } from "@/common/services/api.service";
 
 type SignInResponse = {
   access_token: string;
@@ -12,8 +12,7 @@ export type GetUserProfileResponse = {
 };
 
 export async function signInUser(userData: SignInUserData) {
-  const response = await makeApiRequest<SignInResponse>({
-    url: "/auth/login",
+  const response = await sendApiRequest<SignInResponse>("/auth/login", {
     method: "POST",
     withCredentials: true,
     data: userData,

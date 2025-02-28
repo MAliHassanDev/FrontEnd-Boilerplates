@@ -4,12 +4,12 @@ import {
   Route,
   RouterProvider
 } from "react-router";
-import { RootLayout } from "@/shared/layouts/root/RootLayout";
 import { ToastContainer } from "react-toastify";
 import { Home } from "@/pages/home/HomePage";
 import { SigninPage } from "@/features/auth/pages/SigninPage";
 import { NotFoundPage } from "@/pages/notfound/NotFoundPage";
 import { RequireAuth } from "@/features/auth/components/RequireAuth";
+import { RootLayout } from "@/common/layouts/root/RootLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
