@@ -1,5 +1,4 @@
-import { Counter } from "@/features/counter/Counter";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/common/components/ui/Button";
 import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 
 export const Home = () => {

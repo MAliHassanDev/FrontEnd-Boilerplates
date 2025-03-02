@@ -1,8 +1,8 @@
-import { useState, type FunctionComponent } from "react";
-import { Button } from "../../shared/components/ui/Button";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/app/store/store";
 import { counterActions } from "./counterSlice";
+import { Button } from "@/common/components/ui/Button";
+import type { FunctionComponent } from "react";
 
 export const Counter: FunctionComponent = () => {
  const count = useSelector((state:RootState) => state.counter.value);

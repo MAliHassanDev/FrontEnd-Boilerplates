@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Button } from "@/shared/components/ui/Button";
-import { FormField } from "@/shared/components/ui/form/FormField";
 import { notify } from "@/lib/notify";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
@@ -8,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-import { authService } from "../services/auth.service";
+import { signInUser } from "../services/auth.service";
 import { useDispatch } from "react-redux";
 import { authActions } from "../auth.slice";
+import { FormField } from "@/common/components/ui/form/FormField";
+import { Button } from "@/common/components/ui/Button";
 
 export const SigninPage = () => {
   const {
@@ -24,8 +24,10 @@ export const SigninPage = () => {
       password: "",
     },
   });
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -34,7 +36,7 @@ export const SigninPage = () => {
 
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
-      const { access_token } = await authService.signInUser(data);
+      const { access_token } = await signInUser(data);
       dispatch(authActions.setToken(access_token));
       notify.success("Sign in successful");
       await navigate("/");
