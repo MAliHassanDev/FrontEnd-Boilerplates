@@ -6,20 +6,33 @@ import {
 } from "react-router";
 import { ToastContainer } from "react-toastify";
 import { Home } from "@/pages/home/HomePage";
-import { SigninPage } from "@/features/auth/pages/SigninPage";
 import { NotFoundPage } from "@/pages/notfound/NotFoundPage";
-import { RequireAuth } from "@/features/auth/components/RequireAuth";
 import { RootLayout } from "@/common/layouts/root/RootLayout";
 import { logger } from "@/lib/logger";
+import { PersistentLogin } from "@/common/components/PersistentLogin";
+import { SigninPage } from "@/core/auth/pages/SigninPage";
+import { UnauthorizedPage } from "@/pages/unAuhtorized/UnAuthorizedPage";
+import { RequireAuth } from "@/common/components/RequireAuth";
+import { ROLES } from "@/common/constants/roles.contstant";
+import { EditorPage } from "@/pages/editor/EditorPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route element={<RequireAuth />}>
-        <Route path="/" element={<Home />} />
-      </Route>
+      {/* Public Routes */}
       <Route path="login" element={<SigninPage />} />
-      {/* <Route path="register" element={<RegisterPage />} /> */}
+      <Route path="unauthorized" element={<UnauthorizedPage />} />
+
+      {/* Private Routes */}
+      <Route element={<PersistentLogin />}>
+        <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
+          <Route path="editor" element={<EditorPage />} />
+        </Route>
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Route>,

@@ -2,14 +2,14 @@ import { Link } from "react-router";
 
 const navLinks = [
   { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
+  { to: "/editor", label: "Editor" },
 ];
 
 export const Header = () => {
   return (
     <header className="bg-primary p-4 text-white">
-      <div className="relative flex items-center justify-between ">
+      <div className="relative flex items-center justify-between">
         <Link to="/" className="text-2xl">
           Logo
         </Link>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { notify } from "@/lib/notify";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
@@ -26,7 +26,10 @@ export const SigninPage = () => {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
+
+  const from = (location.state as { from: string } | undefined)?.from ?? "/";
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,10 +39,12 @@ export const SigninPage = () => {
 
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
-      const { access_token } = await signInUser(data);
-      dispatch(authActions.setToken(access_token));
+      const res = await signInUser(data);
+      dispatch(
+        authActions.setAuth({ token: res.access_token, roles: res.roles }),
+      );
       notify.success("Sign in successful");
-      await navigate("/");
+      await navigate(from);
     } catch (error) {
       if (error instanceof Error) {
         notify.error(error.message);

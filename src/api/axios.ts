@@ -1,9 +1,9 @@
 import { store } from "@/app/store/store";
 import { config } from "@/config/config";
-import { authActions } from "@/features/auth/auth.slice";
 import { logger } from "@/lib/logger";
 import { refreshAuthToken } from "@/common/services/token.service";
 import axios, { AxiosError } from "axios";
+import { authActions } from "@/core/auth/auth.slice";
 
 declare module "axios" {
   interface InternalAxiosRequestConfig {
@@ -46,13 +46,13 @@ function createPrivateAxiosInstance() {
         prevRequest.sent = true;
         logger.info("Access token expired");
         try {
-          const token = await refreshAuthToken();
+          const { access_token: token } = await refreshAuthToken();
           prevRequest.headers.Authorization = `Bearer ${token}`;
           return await axiosPrivate.request(prevRequest);
         } catch (error: unknown) {
           logger.error(error, "AxiosPrivateInterceptor");
           // remove auth token from store if refresh token fails
-          store.dispatch(authActions.deleteToken());
+          store.dispatch(authActions.setAuth({}));
           if (error instanceof Error) {
             return Promise.reject(error);
           }

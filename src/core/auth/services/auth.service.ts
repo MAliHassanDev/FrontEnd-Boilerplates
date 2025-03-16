@@ -3,6 +3,7 @@ import { sendApiRequest } from "@/common/services/api.service";
 
 type SignInResponse = {
   access_token: string;
+  roles: number[];
 };
 
 export type UserProfile = Omit<RegisterUserData, "password">;
