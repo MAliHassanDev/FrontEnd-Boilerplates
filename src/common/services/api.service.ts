@@ -1,7 +1,7 @@
 import { axiosPrivate, axiosPublic } from "@/api/axios";
 import { logger } from "@/lib/logger";
 import { ApiException } from "@/utils/exceptions";
-import type { Axios, AxiosError, AxiosRequestConfig } from "axios";
+import type { AxiosError, AxiosRequestConfig } from "axios";
 import axios from "axios";
 
 export type ApiError = {
