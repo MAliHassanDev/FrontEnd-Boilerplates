@@ -24,10 +24,10 @@ export const SigninPage = () => {
       password: "",
     },
   });
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {

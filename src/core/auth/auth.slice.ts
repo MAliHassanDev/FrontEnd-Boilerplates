@@ -5,7 +5,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  token: null
+  token: null,
 };
 
 const authSlice = createSlice({
@@ -17,8 +17,8 @@ const authSlice = createSlice({
     },
     deleteToken: state => {
       state.token = null;
-    }
-  }
+    },
+  },
 });
 
 export const authActions = authSlice.actions;
