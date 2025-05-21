@@ -1,4 +1,5 @@
 import { Button } from "@/common/components/ui/Button";
+import { TestComponent } from "@/common/layouts/components/TestComponent";
 import { ArrowLongRightIcon } from "@heroicons/react/16/solid";
 
 export const Home = () => {
@@ -10,6 +11,7 @@ export const Home = () => {
 };
 
 function HomeHero() {
+  console.log("Rending home page");
   return (
     <div className="pt-30">
       <div className="mx-auto flex max-w-1/2 flex-col items-center justify-center space-y-4 text-center">
@@ -26,6 +28,8 @@ function HomeHero() {
           <span>Get Started</span>
           <ArrowLongRightIcon className="h-6 w-6" />
         </Button>
+
+        <TestComponent />
       </div>
     </div>
   );

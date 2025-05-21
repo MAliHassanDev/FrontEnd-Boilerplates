@@ -1,15 +1,9 @@
-import type { RegisterUserData, SignInUserData } from "../schema/auth.schema";
+import type { SignInUserData } from "../schema/auth.schema";
 import { sendApiRequest } from "@/common/services/api.service";
 
 type SignInResponse = {
-  access_token: string;
-  roles: number[];
-};
-
-export type UserProfile = Omit<RegisterUserData, "password">;
-
-export type GetUserProfileResponse = {
-  user: UserProfile;
+  accessToken: string;
+  role: number;
 };
 
 export async function signInUser(userData: SignInUserData) {

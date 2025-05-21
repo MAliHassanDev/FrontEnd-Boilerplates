@@ -7,10 +7,9 @@ import { signInUserSchema, type SignInUserData } from "../schema/auth.schema";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { signInUser } from "../services/auth.service";
-import { useDispatch } from "react-redux";
-import { authActions } from "../auth.slice";
 import { FormField } from "@/common/components/ui/form/FormField";
 import { Button } from "@/common/components/ui/Button";
+import { useAuthStore } from "../auth.store";
 
 export const SigninPage = () => {
   const {
@@ -27,9 +26,10 @@ export const SigninPage = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const from = (location.state as { from: string } | undefined)?.from ?? "/";
+
+  const authState = useAuthStore();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -40,9 +40,7 @@ export const SigninPage = () => {
   const onSubmit: SubmitHandler<SignInUserData> = async function (data) {
     try {
       const res = await signInUser(data);
-      dispatch(
-        authActions.setAuth({ token: res.access_token, roles: res.roles }),
-      );
+      authState.setAuth(res);
       notify.success("Sign in successful");
       await navigate(from);
     } catch (error) {

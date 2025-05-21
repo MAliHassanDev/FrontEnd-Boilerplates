@@ -2,16 +2,17 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import App from "@/app/App";
 import "./styles/index.css";
-import { Provider } from "react-redux";
-import { store } from "./app/store/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Unable to find the root element");
 
+const queryClient = new QueryClient();
+
 createRoot(rootElement).render(
   <StrictMode>
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </Provider>
+    </QueryClientProvider>
   </StrictMode>,
 );

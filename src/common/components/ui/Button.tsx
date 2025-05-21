@@ -2,14 +2,14 @@ import type { ButtonHTMLAttributes } from "react";
 
 type ButtonProps = {
   outline?: boolean;
-  shape: "primary" | "neutral" | "secondary" | "accent";
+  shape?: "primary" | "neutral" | "secondary" | "accent";
   pending?: boolean;
   onClick?: () => void | Promise<void>;
   children: React.ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
-  shape,
+  shape = "primary",
   pending,
   onClick,
   children,
@@ -19,7 +19,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`btn ${shape === "primary" ? "btn-primary" : shape === "secondary" ? "btn-secondary" : shape === "accent" ? "btn-accent" : "btn-neutral"} ${outline ? "btn-outline" : ""} ${className}`}
+      className={`btn cursor-pointer ${shape === "primary" ? "btn-primary" : shape === "secondary" ? "btn-secondary" : shape === "accent" ? "btn-accent" : "btn-neutral"} ${outline ? "btn-outline" : ""} ${className}`}
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onClick={onClick}
       {...buttonAttributes}

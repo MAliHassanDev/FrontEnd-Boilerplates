@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 export const notify = {
   success: (message: string) => {
@@ -8,9 +8,6 @@ export const notify = {
     toast.error(message);
   },
   info: (message: string) => {
-    toast.info(message);
-  },
-  warn: (message: string) => {
-    toast.warn(message);
+    toast.custom(message);
   },
 };

@@ -1,3 +1,6 @@
+import { Avatar } from "@/common/components/ui/Avater";
+import { useUserProfile } from "@/core/users/services/users-query";
+import { logger } from "@/lib/logger";
 import { Link } from "react-router";
 
 const navLinks = [
@@ -7,6 +10,8 @@ const navLinks = [
 ];
 
 export const Header = () => {
+  const { data } = useUserProfile();
+  logger.log("User profile data in header", data);
   return (
     <header className="bg-primary p-4 text-white">
       <div className="relative flex items-center justify-between">
@@ -22,19 +27,8 @@ export const Header = () => {
           ))}
         </nav>
 
-        <div className="flex space-x-4">
-          <Link
-            to="/login"
-            className="btn btn-outline text-white hover:bg-transparent"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="btn btn-outline text-white hover:bg-transparent"
-          >
-            Register
-          </Link>
+        <div>
+          <Avatar />
         </div>
       </div>
     </header>

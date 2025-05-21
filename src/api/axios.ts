@@ -1,9 +1,8 @@
-import { store } from "@/app/store/store";
 import { config } from "@/config/config";
 import { logger } from "@/lib/logger";
 import { refreshAuthToken } from "@/common/services/token.service";
 import axios, { AxiosError } from "axios";
-import { authActions } from "@/core/auth/auth.slice";
+import { useAuthStore } from "@/core/auth/auth.store";
 
 declare module "axios" {
   interface InternalAxiosRequestConfig {
@@ -27,10 +26,12 @@ function createPrivateAxiosInstance() {
       "Content-Type": "application/json",
     },
   });
+
   // attaches access token in every request header
   axiosPrivate.interceptors.request.use(config => {
-    if (!config.headers.Authorization) {
-      config.headers.Authorization = `Bearer ${store.getState().auth.token ?? ""}`;
+    const accessToken = useAuthStore.getState().auth?.accessToken;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   });
@@ -46,13 +47,14 @@ function createPrivateAxiosInstance() {
         prevRequest.sent = true;
         logger.info("Access token expired");
         try {
-          const { access_token: token } = await refreshAuthToken();
-          prevRequest.headers.Authorization = `Bearer ${token}`;
+          const auth = await refreshAuthToken();
+          useAuthStore.setState({ auth });
+          prevRequest.headers.Authorization = `Bearer ${auth.accessToken}`;
           return await axiosPrivate.request(prevRequest);
         } catch (error: unknown) {
           logger.error(error, "AxiosPrivateInterceptor");
-          // remove auth token from store if refresh token fails
-          store.dispatch(authActions.setAuth({}));
+          // remove auth from store if refresh token fails
+          useAuthStore.setState({ auth: null });
           if (error instanceof Error) {
             return Promise.reject(error);
           }

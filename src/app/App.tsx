@@ -4,7 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import { Home } from "@/pages/home/HomePage";
 import { NotFoundPage } from "@/pages/notfound/NotFoundPage";
 import { RootLayout } from "@/common/layouts/root/RootLayout";
@@ -15,12 +15,16 @@ import { UnauthorizedPage } from "@/pages/unAuhtorized/UnAuthorizedPage";
 import { RequireAuth } from "@/common/components/RequireAuth";
 import { ROLES } from "@/common/constants/roles.contstant";
 import { EditorPage } from "@/pages/editor/EditorPage";
+import { AuthLayout } from "@/core/auth/layout/authLayout";
+import ErrorBoundary from "@/common/components/ErrorBoundary";
 
 const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      {/* Public Routes */}
-      <Route path="login" element={<SigninPage />} />
+  createRoutesFromElements([
+    <Route element={<AuthLayout />}>
+      <Route path="login" element={<SigninPage />} />,
+    </Route>,
+
+    <Route path="/" element={<RootLayout />} errorElement={<ErrorBoundary />}>
       <Route path="unauthorized" element={<UnauthorizedPage />} />
 
       {/* Private Routes */}
@@ -36,7 +40,7 @@ const router = createBrowserRouter(
 
       <Route path="*" element={<NotFoundPage />} />
     </Route>,
-  ),
+  ]),
 );
 
 const App = () => {
@@ -44,7 +48,7 @@ const App = () => {
 
   return (
     <div className="">
-      <ToastContainer />
+      <Toaster />
       <RouterProvider router={router} />
     </div>
   );
