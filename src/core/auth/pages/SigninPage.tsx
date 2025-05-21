@@ -8,14 +8,16 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { signInUser } from "../services/auth.service";
 import { FormField } from "@/common/components/ui/form/FormField";
-import { Button } from "@/common/components/ui/Button";
 import { useAuthStore } from "../auth.store";
-
+import { Button } from "@/common/components/ui/Button";
+import { Loader2 } from "lucide-react";
+import { Checkbox } from "@/common/components/ui/Checkbox";
+import { DividerWithText } from "@/common/components/ui/Divider";
 export const SigninPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting: pending },
+    formState: { errors, isSubmitting },
   } = useForm<SignInUserData>({
     resolver: zodResolver(signInUserSchema),
     defaultValues: {
@@ -68,13 +70,14 @@ export const SigninPage = () => {
             </Link>
           </span>
 
-          <a className="btn btn-neutral">
-            <i className="fa-brands fa-google text-primary"></i>
-            Log in with Google
-          </a>
+          <Button asChild>
+            <a className="btn btn-neutral">
+              <i className="fa-brands fa-google text-primary"></i>
+              Log in with Google
+            </a>
+          </Button>
 
-          <div className="divider">OR</div>
-
+          <DividerWithText text="OR" />
           <FormField
             errorMessage={errors.email?.message}
             name="email"
@@ -92,8 +95,9 @@ export const SigninPage = () => {
             autoComplete="password"
             register={register}
           >
-            <button
-              className="btn btn-ghost btn-sm btn-circle absolute top-[56%] right-0 mr-2"
+            <Button
+              className="absolute top-[44%] right-0 mr-2"
+              variant={"ghost"}
               onClick={togglePasswordVisibility}
               type="button"
             >
@@ -102,17 +106,21 @@ export const SigninPage = () => {
               ) : (
                 <EyeSlashIcon className="h-6 text-gray-400" />
               )}
-            </button>
+            </Button>
           </FormField>
 
-          <div className="form-control">
-            <label className="label cursor-pointer gap-2 self-start">
-              <input type="checkbox" className="checkbox" />
-              <span className="label-text">Remember me</span>
+          <div className="flex items-center space-x-2">
+            <Checkbox id="terms1" />
+            <label
+              htmlFor="terms1"
+              className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Accept terms and conditions
             </label>
           </div>
 
-          <Button shape="primary" type="submit" pending={pending}>
+          <Button disabled={isSubmitting}>
+            {isSubmitting && <Loader2 className="animate-spin" />}
             Log In
           </Button>
         </div>

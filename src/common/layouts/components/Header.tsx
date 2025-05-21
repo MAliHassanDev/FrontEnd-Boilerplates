@@ -1,6 +1,7 @@
-import { Avatar } from "@/common/components/ui/Avater";
+import { Avatar, AvatarFallback } from "@/common/components/ui/Avatar";
 import { useUserProfile } from "@/core/users/services/users-query";
 import { logger } from "@/lib/logger";
+import { AvatarImage } from "@radix-ui/react-avatar";
 import { Link } from "react-router";
 
 const navLinks = [
@@ -13,7 +14,7 @@ export const Header = () => {
   const { data } = useUserProfile();
   logger.log("User profile data in header", data);
   return (
-    <header className="bg-primary p-4 text-white">
+    <header className="bg-black p-4 text-white">
       <div className="relative flex items-center justify-between">
         <Link to="/" className="text-2xl">
           Logo
@@ -28,7 +29,10 @@ export const Header = () => {
         </nav>
 
         <div>
-          <Avatar />
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </div>
       </div>
     </header>
